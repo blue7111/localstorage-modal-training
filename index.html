@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+    <script defer src="index.js"></script>
+  </head>
+  <body>
+    <header>
+      <button class="sidebar-btn">=</button>
+      <h1 class="glitch-text-tictok">Hello, world!</h1>
+    </header>
+    <div class="modal"></div>
+    <button class="darkmode">🌘</button>
+    <aside class="side-bar">
+      <ul>
+        <h2>My Page</h2>
+        <li>Name <br /><span class="mypage-name"></span></li>
+        <li>Number <br /><span class="mypage-number"></span></li>
+        <li>ID <br /><span class="mypage-id"></span></li>
+      </ul>
+      <div class="sidebar-btns">
+        <button class="logout btn">Logout</button>
+        <button class="changepassword btn">Password Change</button>
+        <button class="withdrawal btn">withdrawal</button>
+      </div>
+    </aside>
+    <main class="quest">
+      <div class="modalbtnsBox">
+        <div class="modalbtns">
+          <p>Login ?</p>
+          <button class="btn loginOpen">Login</button>
+          <p>Signup ?</p>
+          <button class="btn signupOpen">Signup</button>
+          <p>Find ID ?</p>
+          <button class="findIDOpen btn">Find ID</button>
+          <p>Find PW ?</p>
+          <button class="findPSOpen btn">Find PW</button>
+        </div>
+      </div>
+      <div class="loginbox">
+        <h3 class="boxTitle">Login</h3>
+        <form class="loginform">
+          <input type="text" class="login id" placeholder="ID" />
+          <input
+            type="password"
+            class="login password"
+            placeholder="Password"
+          />
+          <div class="submit-btns">
+            <button type="submit" class="login btn">Login</button>
+          </div>
+        </form>
+      </div>
+      <div class="signupbox">
+        <h3 class="boxTitle">Signup</h3>
+        <form class="signupform">
+          <input type="text" class="signup name" placeholder="Name" />
+          <input
+            type="text"
+            class="signup number"
+            placeholder="Number dont using '-'"
+          />
+          <input type="text" class="signup id" placeholder="ID" />
+          <input
+            type="password"
+            class="signup password"
+            placeholder="Password"
+          />
+          <input
+            type="password"
+            class="signup password check"
+            placeholder="Password"
+          />
+          <div class="submit-btns">
+            <button type="submit" class="signup btn">Signup</button>
+          </div>
+        </form>
+      </div>
+      <div class="findIdBox">
+        <h3 class="boxTitle">Find ID</h3>
+        <form class="findIdform">
+          <input type="text" class="findId name" placeholder="Name" />
+          <input
+            type="text"
+            class="findId number"
+            placeholder="Number dont using '-'"
+          />
+          <div class="findingId">
+            <button class="findId btn">Serch</button>
+          </div>
+        </form>
+      </div>
+      <div class="findPsBox">
+        <h3 class="boxTitle">Find PW</h3>
+        <form class="findPsform">
+          <input type="text" class="findPs name" placeholder="Name" />
+          <input
+            type="text"
+            class="findPs number"
+            placeholder="Number dont using '-'"
+          />
+          <input type="text" class="findPs id" placeholder="ID" />
+          <div class="findingPs">
+            <button class="findPs btn">Serch</button>
+          </div>
+        </form>
+      </div>
+      <div class="MainLoginBox">
+        <div class="noticeAddBox">
+          <h3 class="boxTitle">질문을 등록해주세요.</h3>
+          <form class="noticeAddForm">
+            <input type="text" class="AddTitle" placeholder="Title" />
+            <textarea class="AddStory" placeholder="Story"></textarea>
+            <button class="AddSubmit btn">Add Notice !</button>
+          </form>
+        </div>
+        <div class="noticeBoardBox">
+          <button class="noticeAddBoxOpen btn">Add Notice ?</button>
+          <div class="pageStateContainer">
+            <button class="pagePrev btn"><</button>
+            <h3 class="pageState">1</h3>
+            <button class="pageNext btn">></button>
+          </div>
+          <ul class="noticeBoard">
+            <!-- <li class="noticeBoardItem"> 컴포넌트 테스트
+                <div class="ItemInfo">
+                  <p class="ContentTitle">test12312213ContentTitle113123123</p>
+                </div>
+                <div class="ItemContent">
+                  <p class="ContentStory">
+                    1222131322131232132131212312321312321231321321312
+                  </p>
+                </div>
+                <div class="moreInfo">
+                  <p class="InfoUser">UserName / Date</p>
+                  <button class="ContentStoryInfo btn">more ?</button>
+                </div>
+              </li> -->
+          </ul>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
