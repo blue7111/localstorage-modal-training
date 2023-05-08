@@ -620,12 +620,12 @@ const convertToNotice = (obj) => {
     }
   });
 
-  if (obj.title.length < 20 && 20 > obj.story.length) {
-    ContentStoryInfobtn.remove();
-  }
-  if (obj.id !== UserId) {
-    ContentDlebtn.remove();
-  }
+  // if (obj.title.length < 20 && 20 > obj.story.length) {
+  //   ContentStoryInfobtn.remove();
+  // }
+  // if (obj.id !== UserId) {
+  //   ContentDlebtn.remove();
+  // }
 
   noticeItem.append(ItemInfo, ItemContent, moreInfo);
   return noticeItem;
