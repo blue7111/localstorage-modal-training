@@ -444,6 +444,7 @@ findPwform.addEventListener("submit", () => {
 
 const NoticeAddTitle = document.querySelector(".AddTitle");
 let titlebool = false;
+
 NoticeAddTitle.addEventListener("input", () => {
   const regExp =
     /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s\[\]\(\)\{\}\*\+\?\^\$\|~!@#%&_-]{5,100}$/;
@@ -461,6 +462,7 @@ NoticeAddTitle.addEventListener("input", () => {
     titlebool = false;
   }
 });
+
 const NoticeAddStory = document.querySelector(".AddStory");
 let storybool = false;
 NoticeAddStory.addEventListener("input", () => {
@@ -492,6 +494,7 @@ NoticeAddSubmit.addEventListener("click", (event) => {
       title: NoticeAddTitle.value,
       story: NoticeAddStory.value,
       date: new Date().toLocaleString(),
+      answer: null,
     };
 
     noticeList.push(newNotice);
@@ -512,33 +515,80 @@ const noticeList = JSON.parse(localStorage.getItem("noticeList")) || [];
 const convertToNotice = (obj) => {
   const noticeItem = document.createElement("li");
   noticeItem.className = "noticeBoardItem";
-
   const ItemInfo = document.createElement("div");
   ItemInfo.className = "ItemInfo";
   const ContentTitle = document.createElement("p");
   ContentTitle.className = "ContentTitle";
   ContentTitle.textContent = obj.title;
-  ItemInfo.append(ContentTitle);
-
   const ItemContent = document.createElement("div");
   ItemContent.className = "ItemContent";
   const ContentStory = document.createElement("p");
   ContentStory.className = "ContentStory";
   ContentStory.textContent = obj.story;
-  ItemContent.append(ContentStory);
-
+  const ContentAnswer = document.createElement("p");
+  ContentAnswer.className = "ContentAnswer";
   const moreInfo = document.createElement("div");
   moreInfo.className = "moreInfo";
   const InfoUser = document.createElement("p");
   InfoUser.className = "InfoUser";
   InfoUser.textContent = `${obj.name} / ${obj.date}`;
+  const Answerbtn = document.createElement("button");
+  Answerbtn.className = "Answerbtn btn";
+  Answerbtn.textContent = "AddAnswer";
   const ContentStoryInfobtn = document.createElement("button");
   ContentStoryInfobtn.className = "ContentStoryInfo btn";
-  ContentStoryInfobtn.textContent = `more ?`;
+  ContentStoryInfobtn.textContent = `More ?`;
   const ContentDlebtn = document.createElement("button");
   ContentDlebtn.className = "ContentDle btn";
   ContentDlebtn.textContent = "Delete ?";
-  moreInfo.append(InfoUser, ContentStoryInfobtn, ContentDlebtn);
+  ItemInfo.append(ContentTitle);
+
+  moreInfo.append(InfoUser, Answerbtn, ContentStoryInfobtn, ContentDlebtn);
+
+  const AddAnswerBox = document.querySelector(".AddAnswerBox");
+  Answerbtn.addEventListener("click", () => {
+    showBox(AddAnswerBox);
+  });
+  modal.addEventListener("click", () => {
+    bodyClass.remove("show");
+    AddAnswerBox.classList.remove("open");
+  });
+
+  let Answerbool = false;
+  const AddAnswer = document.querySelector(".AddAnswer");
+  AddAnswer.addEventListener("input", () => {
+    const regExp =
+      /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s\[\]\(\)\{\}\*\+\?\^\$\.\|~!@#%&_-]{10,500}$/;
+    if (AddAnswer.value.trim() === "") {
+      AddAnswer.classList.remove("inputError");
+      AddAnswer.classList.remove("inputSuccess");
+      Answerbool = false;
+    } else if (regExp.test(AddAnswer.value)) {
+      AddAnswer.classList.remove("inputError");
+      AddAnswer.classList.add("inputSuccess");
+      Answerbool = true;
+    } else {
+      AddAnswer.classList.add("inputError");
+      AddAnswer.classList.remove("inputSuccess");
+      Answerbool = false;
+    }
+  });
+
+  const AddAnswerBtn = document.querySelector(".AddAnswerBtn");
+  AddAnswerBtn.addEventListener("click", () => {
+    if (Answerbool === true) {
+      obj.answer = AddAnswer.value.trim();
+      localStorage.setItem("noticeList", JSON.stringify(noticeList));
+      alert("답변이 등록되었습니다 !");
+      AddAnswerBox.classList.remove("open");
+      bodyClass.remove("show");
+      location.reload();
+    } else {
+      alert("올바르게 작성해주세요 !");
+    }
+  });
+
+  ItemContent.append(ContentStory, ContentAnswer);
 
   ContentStoryInfobtn.addEventListener("click", () => {
     ContentStory.classList.toggle("more");
@@ -546,10 +596,13 @@ const convertToNotice = (obj) => {
     noticeItem.classList.toggle("noticeborder");
     InfoUser.classList.toggle("noticeborder");
     ItemInfo.classList.toggle("noticeborder");
+    Answerbtn.classList.toggle("noticeborder");
+    ContentAnswer.classList.toggle("noticeborder");
+    ContentDlebtn.classList.toggle("noticeborder");
     ContentStoryInfobtn.classList.toggle("noticeborder");
     ContentStoryInfobtn.textContent = ContentStory.classList.contains("more")
-      ? "done..."
-      : "more ?";
+      ? "Done..."
+      : "More ?";
   });
 
   ContentDlebtn.addEventListener("click", () => {
@@ -573,6 +626,7 @@ const convertToNotice = (obj) => {
   if (obj.id !== UserId) {
     ContentDlebtn.remove();
   }
+
   noticeItem.append(ItemInfo, ItemContent, moreInfo);
   return noticeItem;
 };

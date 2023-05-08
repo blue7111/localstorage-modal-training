@@ -206,7 +206,8 @@ body.show .modal {
 .signupbox,
 .findIdBox,
 .findPsBox,
-.noticeAddBox {
+.noticeAddBox,
+.AddAnswerBox {
   width: 500px;
   height: 500px;
   position: absolute;
@@ -218,7 +219,8 @@ body.show .modal {
 .signupbox.open,
 .findIdBox.open,
 .findPsBox.open,
-.noticeAddBox.open {
+.noticeAddBox.open,
+.AddAnswerBox.open {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -281,6 +283,33 @@ textarea {
   color: var(--switch-color);
 }
 
+.AddAnswer {
+  background-color: transparent;
+  outline: none;
+  width: 500px;
+  height: 500px;
+  margin: 10px;
+  font-size: 30px;
+  font-weight: 200;
+  resize: none;
+}
+
+.ContentAnswer {
+  border-top: 1px solid var(--switch-light-color);
+  border-bottom: 1px solid var(--switch-light-color);
+  text-align: left;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-all;
+  font-size: 20px;
+}
+
+.ContentAnswer.noticeborder {
+  border-bottom: 1px solid var(--Button-light-color);
+  border-top: 1px solid var(--Button-light-color);
+}
+
 .AddStory {
   background-color: transparent;
   outline: none;
@@ -338,7 +367,7 @@ textarea {
 }
 
 .ContentTitle {
-  font-size: 35px;
+  font-size: 40px;
   max-width: 500px;
   overflow-wrap: break-word;
   overflow: hidden;
@@ -348,7 +377,7 @@ textarea {
 
 .InfoUser {
   font-size: 18px;
-  color: var(--switch-color);
+  color: rgba(123, 4, 105, 0.99);
 }
 
 .ItemContent {
@@ -374,11 +403,29 @@ textarea {
   color: red;
 }
 
+.ContentDle.noticeborder {
+  color: red;
+  border: 1px solid red;
+}
+
+.Answerbtn {
+  width: 100px;
+  float: right;
+  color: var(--dark-color);
+  border: 1px solid var(--switch-light-color);
+}
+
+.Answerbtn.noticeborder {
+  color: var(--Button-light-color);
+  border: 1px solid var(--Button-light-color);
+}
+
 .ContentStory {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: left;
+  font-size: 30px;
 }
 
 .more {
