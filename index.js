@@ -590,14 +590,17 @@ const pagePrev = document.querySelector(".pagePrev.btn");
 const pagePrevPrev = document.querySelector(".pagePrevPrev.btn");
 const pageNext = document.querySelector(".pageNext.btn");
 const pageNextNext = document.querySelector(".pageNextNext");
+const pageState = document.querySelector(".pageState");
 
 let page = 1;
 localStorage.getItem("page") == undefined
   ? (page = 1)
   : (page = Number(localStorage.getItem("page")));
-document.querySelector(".pageState").textContent = 0;
 let pageMin = 1;
 let pageMax = Math.ceil(noticeList.length / 4);
+pageMax === undefined
+  ? (pageState.textContent = page)
+  : (pageState.textContent = `${page} / ${pageMax}`);
 
 pagePrev.addEventListener("click", () => {
   if (pageMin == page) {
