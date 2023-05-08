@@ -535,7 +535,10 @@ const convertToNotice = (obj) => {
   const ContentStoryInfobtn = document.createElement("button");
   ContentStoryInfobtn.className = "ContentStoryInfo btn";
   ContentStoryInfobtn.textContent = `more ?`;
-  moreInfo.append(InfoUser, ContentStoryInfobtn);
+  const ContentDlebtn = document.createElement("button");
+  ContentDlebtn.className = "ContentDle btn";
+  ContentDlebtn.textContent = "Delete ?";
+  moreInfo.append(InfoUser, ContentStoryInfobtn, ContentDlebtn);
 
   ContentStoryInfobtn.addEventListener("click", () => {
     ContentStory.classList.toggle("more");
@@ -548,8 +551,27 @@ const convertToNotice = (obj) => {
       ? "done..."
       : "more ?";
   });
+
+  ContentDlebtn.addEventListener("click", () => {
+    if (
+      confirm("삭제된 글은 복구할 수 없습니다, 게시글을 삭제 하시겠습니까?")
+    ) {
+      const index = noticeList.findIndex((item) => item.id === obj.id);
+      if (index !== -1) {
+        noticeList.splice(index, 1);
+        localStorage.setItem("noticeList", JSON.stringify(noticeList));
+        location.reload();
+      }
+    } else {
+      alert("게시글 삭제를 취소하셨습니다.");
+    }
+  });
+
   if (obj.title.length < 20 && 20 > obj.story.length) {
     ContentStoryInfobtn.remove();
+  }
+  if (obj.id !== UserId) {
+    ContentDlebtn.remove();
   }
   noticeItem.append(ItemInfo, ItemContent, moreInfo);
   return noticeItem;
@@ -565,13 +587,15 @@ const noticeRender = (element, page) => {
 };
 
 const pagePrev = document.querySelector(".pagePrev.btn");
+const pagePrevPrev = document.querySelector(".pagePrevPrev.btn");
 const pageNext = document.querySelector(".pageNext.btn");
+const pageNextNext = document.querySelector(".pageNextNext");
 
 let page = 1;
 localStorage.getItem("page") == undefined
   ? (page = 1)
   : (page = Number(localStorage.getItem("page")));
-document.querySelector(".pageState").textContent = page;
+document.querySelector(".pageState").textContent = 0;
 let pageMin = 1;
 let pageMax = Math.ceil(noticeList.length / 4);
 
@@ -583,7 +607,19 @@ pagePrev.addEventListener("click", () => {
     page -= 1;
     localStorage.setItem("page", page);
     noticeRender(ulNotice, page);
-    document.querySelector(".pageState").textContent = page;
+    document.querySelector(".pageState").textContent = `${page} / ${pageMax}`;
+  }
+});
+
+pagePrevPrev.addEventListener("click", () => {
+  if (pageMin == page) {
+    return;
+  }
+  if (pageMin != page) {
+    page = 1;
+    localStorage.setItem("page", page);
+    noticeRender(ulNotice, page);
+    document.querySelector(".pageState").textContent = `${page} / ${pageMax}`;
   }
 });
 
@@ -595,7 +631,19 @@ pageNext.addEventListener("click", () => {
     page += 1;
     localStorage.setItem("page", page);
     noticeRender(ulNotice, page);
-    document.querySelector(".pageState").textContent = page;
+    document.querySelector(".pageState").textContent = `${page} / ${pageMax}`;
+  }
+});
+
+pageNextNext.addEventListener("click", () => {
+  if (pageMax == page) {
+    return;
+  }
+  if (pageMax != page) {
+    page = pageMax;
+    localStorage.setItem("page", page);
+    noticeRender(ulNotice, page);
+    document.querySelector(".pageState").textContent = `${page} / ${pageMax}`;
   }
 });
 

@@ -359,7 +359,19 @@ textarea {
   float: right;
   width: 100px;
   color: var(--dark-color);
-  transition: height 1s ease-in-out;
+  border: 1px solid var(--switch-light-color);
+}
+
+.ContentDle {
+  width: 100px;
+  float: right;
+  color: var(--dark-color);
+  border: 1px solid var(--switch-light-color);
+}
+
+.ContentDle:hover {
+  border: 1px solid red;
+  color: red;
 }
 
 .ContentStory {
@@ -407,11 +419,17 @@ textarea {
 .pageStateContainer > button:hover {
   background: transparent;
   border: none;
+  transform: none;
+  transition: all 0.1s ease-in-out;
+}
+
+.pageStateContainer > button:active {
+  transform: translateY(3px);
 }
 
 button:active {
   transform: translateY(3px);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: none;
 }
 
 .pageState {
@@ -426,8 +444,4 @@ button:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.ContentStoryInfo {
-  border: 1px solid var(--switch-light-color);
 }
