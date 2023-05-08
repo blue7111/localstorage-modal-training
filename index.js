@@ -598,9 +598,18 @@ localStorage.getItem("page") == undefined
   : (page = Number(localStorage.getItem("page")));
 let pageMin = 1;
 let pageMax = Math.ceil(noticeList.length / 4);
-pageMax === undefined
-  ? (pageState.textContent = page)
-  : (pageState.textContent = `${page} / ${pageMax}`);
+if (noticeList.length === 0) {
+  pageState.textContent = 1;
+} else {
+  pageState.textContent = `${page} / ${pageMax}`;
+}
+
+if (noticeList.length < 1) {
+  pagePrevPrev.disabled = true;
+  pagePrev.disabled = true;
+  pageNextNext.disabled = true;
+  pageNext.disabled = true;
+}
 
 pagePrev.addEventListener("click", () => {
   if (pageMin == page) {
